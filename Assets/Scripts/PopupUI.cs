@@ -4,7 +4,7 @@ using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 
 namespace ProjectYouMustClickYes
 {
@@ -13,6 +13,7 @@ namespace ProjectYouMustClickYes
         public TextMeshProUGUI dialogueText;
         public Button noButton;
         public Button yesButton;
+        public string nextLevel;
         private int dialogueIndex = 0;
         private List<string> dialogues = new List<string>();
         private Animator _animator;
@@ -29,9 +30,10 @@ namespace ProjectYouMustClickYes
         void Start()
         {
             LoadDialogues();
-            
+
             yesButton.onClick.AddListener(ChangeText);
             noButton.onClick.AddListener(() => { _animator.SetTrigger(_hashEndNo); });
+            noButton.onClick.AddListener(() => { StartCoroutine(WaitForAnimationAndLoadScene("Start")); });
 
             if (dialogues.Count > 0)
             {
@@ -46,10 +48,22 @@ namespace ProjectYouMustClickYes
             {
                 string json = File.ReadAllText(path);
                 DialogueData data = JsonUtility.FromJson<DialogueData>(json);
-                dialogues = data.dialogues;
+
+                DialogueEntry entry = data.dialogues.Find(d => d.sceneName == SceneManager.GetActiveScene().name);
+
+                if (entry != null)
+                {
+                    dialogues = entry.dialogueList;
+                }
+                else
+                {
+                    dialogues.Add(SceneManager.GetActiveScene().name);
+                    Debug.LogError("해당 씬에 대한 대화 데이터가 없습니다.");
+                }
             }
         }
 
+        // Yes 버튼을 눌렀을 경우
         void ChangeText()
         {
             if (dialogueIndex < dialogues.Count - 1)
@@ -62,7 +76,16 @@ namespace ProjectYouMustClickYes
             {
                 // 마무리 애니메이션 실행
                 _animator.SetTrigger(_hashEndYes);
+                StartCoroutine(WaitForAnimationAndLoadScene(nextLevel));
             }
+        }
+
+        // 마무리 애니메이션이 끝날 때까지 기다린 후 레벨 이동
+        IEnumerator WaitForAnimationAndLoadScene(string sceneName)
+        {
+            yield return new WaitForSeconds(4.0f);
+
+            SceneManager.LoadScene(sceneName);
         }
 
         IEnumerator ChangeTextAfterAnimation()
@@ -81,13 +104,13 @@ namespace ProjectYouMustClickYes
         public void MoveYesButtonAboveNo()
         {
             yesButton.transform.SetAsLastSibling();
-            noButton.transform.SetAsFirstSibling();
+            //noButton.transform.SetAsFirstSibling();
         }
 
         // 아니오 버튼을 위로 바꾸는 함수
         public void MoveNoButtonAboveYes()
         {
-            yesButton.transform.SetAsFirstSibling();
+            //yesButton.transform.SetAsFirstSibling();
             noButton.transform.SetAsLastSibling();
 
         }
