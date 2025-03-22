@@ -198,6 +198,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &835089146
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 835089148}
+  - component: {fileID: 835089147}
+  m_Layer: 0
+  m_Name: Level Event Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &835089147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 835089146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3487426f64ff52548ab149fa1a5365c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupUIController: {fileID: 1716333433}
+  showNoAtIndex: 8
+--- !u!4 &835089148
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 835089146}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 351.95663, y: 196.14154, z: 2.7449038}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1361191735
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,6 +352,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3659724894578955272, guid: 9fa0d2406cbd2284fad87e21b5373a33, type: 3}
   m_PrefabInstance: {fileID: 6595228080925302959}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1716333433 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8177125683832279528, guid: 9fa0d2406cbd2284fad87e21b5373a33, type: 3}
+  m_PrefabInstance: {fileID: 6595228080925302959}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb491b1d70657540b21335e3b627b93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2038330972
 GameObject:
   m_ObjectHideFlags: 0
@@ -623,9 +680,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Panel_PopupUI
       objectReference: {fileID: 0}
-    - target: {fileID: 8177125683832279528, guid: 9fa0d2406cbd2284fad87e21b5373a33, type: 3}
-      propertyPath: nextLevel
-      value: Level2
+    - target: {fileID: 8863914881605038835, guid: 9fa0d2406cbd2284fad87e21b5373a33, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -638,4 +695,5 @@ SceneRoots:
   m_Roots:
   - {fileID: 2038330975}
   - {fileID: 678208129}
+  - {fileID: 835089148}
   - {fileID: 1361191739}

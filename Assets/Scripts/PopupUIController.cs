@@ -5,24 +5,27 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 namespace ProjectYouMustClickYes
 {
-    public class PopupUI : MonoBehaviour
+    public class PopupUIController : MonoBehaviour
     {
         public TextMeshProUGUI dialogueText;
         public Button noButton;
         public Button yesButton;
         public string nextLevel;
-        private int dialogueIndex = 0;
-        private List<string> dialogues = new List<string>();
+        public int dialogueIndex = 0;
+        public List<string> dialogues = new List<string>();
+
+        public UnityEvent OnChangeTextEvnet;
         private Animator _animator;
 
         readonly int _hashLoopYes = Animator.StringToHash("loop_yes");
         readonly int _hashEndNo = Animator.StringToHash("end_no");
         readonly int _hashEndYes = Animator.StringToHash("end_yes");
 
-        void Awake()
+        private void Awake()
         {
             _animator = GetComponent<Animator>();
         }
@@ -39,6 +42,12 @@ namespace ProjectYouMustClickYes
             {
                 dialogueText.text = dialogues[0];
             }
+        }
+
+        private void OnDestroy()
+        {
+            yesButton.onClick.RemoveListener(ChangeText);
+            noButton.onClick.RemoveAllListeners();
         }
 
         void LoadDialogues()
@@ -94,9 +103,10 @@ namespace ProjectYouMustClickYes
             _animator.SetTrigger(_hashLoopYes);
 
             // 애니메이션이 끝날 때까지 대기 (애니메이션 클립 길이에 맞게 설정)
-            yield return new WaitForSeconds(_animator.GetCurrentAnimatorStateInfo(0).length);
+            yield return new WaitForSeconds(_animator.GetCurrentAnimatorStateInfo(0).length + 0.2f);
 
             // 텍스트 변경
+            OnChangeTextEvnet?.Invoke();
             dialogueText.text = dialogues[dialogueIndex];
         }
 

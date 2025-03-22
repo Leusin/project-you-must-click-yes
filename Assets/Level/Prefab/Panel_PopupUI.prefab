@@ -237,6 +237,8 @@ MonoBehaviour:
   noButton: {fileID: 5013393311327345559}
   yesButton: {fileID: 8561416338969349548}
   nextLevel: 
+  dialogueIndex: 0
+  dialogues: []
 --- !u!95 &3019487167049597357
 Animator:
   serializedVersion: 7
@@ -404,19 +406,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1253514507514309184}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5355286000166031941}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &7863055263410950040
 GameObject:
   m_ObjectHideFlags: 0
