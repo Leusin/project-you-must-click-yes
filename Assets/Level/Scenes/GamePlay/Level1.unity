@@ -680,6 +680,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Panel_PopupUI
       objectReference: {fileID: 0}
+    - target: {fileID: 8177125683832279528, guid: 9fa0d2406cbd2284fad87e21b5373a33, type: 3}
+      propertyPath: nextLevel
+      value: Level2
+      objectReference: {fileID: 0}
     - target: {fileID: 8863914881605038835, guid: 9fa0d2406cbd2284fad87e21b5373a33, type: 3}
       propertyPath: m_IsActive
       value: 0

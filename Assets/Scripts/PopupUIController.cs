@@ -73,7 +73,7 @@ namespace ProjectYouMustClickYes
         }
 
         // Yes 버튼을 눌렀을 경우
-        void ChangeText()
+        public void ChangeText()
         {
             if (dialogueIndex < dialogues.Count - 1)
             {
