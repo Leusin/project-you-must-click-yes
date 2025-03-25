@@ -14,12 +14,14 @@ namespace ProjectYouMustClickYes
         [SerializeField] private Mask popupMask;
         [SerializeField] private Animator popupAnimator;
         [SerializeField] private RectTransform popupRect;
-        [SerializeField] private RectTransform YesbuttonRect;
-        private Vector2 originalPosition; // 버튼의 원래 위치
-        private int repeat = 0; // 이동 횟수
+        [SerializeField] private RectTransform yesButtonRect;
+        private Vector2 yesOriginalPosition; // 버튼의 원래 위치
+        [SerializeField] private int _cliked = 0; // 이동 횟수
 
-        [Header("Changne Position Button")]
-        [SerializeField] private RectTransform nobuttonRect;
+        [Header("Changne Buttons Position")]
+        [SerializeField] private int indexChangePosition = 7;
+        readonly int _hashChagneButtonPos = Animator.StringToHash("chagne_button_pos");
+
         //[Header("Check Box")]
         //[Header("Upside Down")]
         //[Header("Move Like Screensaver")]
@@ -27,7 +29,7 @@ namespace ProjectYouMustClickYes
 
         void Start()
         {
-            originalPosition = YesbuttonRect.anchoredPosition;
+            yesOriginalPosition = yesButtonRect.anchoredPosition;
         }
 
         public void TeleportButton()
@@ -41,30 +43,40 @@ namespace ProjectYouMustClickYes
             // 조건 인덱스 때
             if (popupUIController.dialogueIndex == indexButtonTeleport)
             {
-                if (repeat == 0)
+                if (_cliked == 0)
                 {
                     popupMask.enabled = false;
                     popupAnimator.enabled = false;
                 }
 
                 // 마무리
-                if (repeat == loop)
+                if (_cliked == loop)
                 {
                     popupMask.enabled = true;
                     popupAnimator.enabled = true;
-                    YesbuttonRect.anchoredPosition = originalPosition;
+                    yesButtonRect.anchoredPosition = yesOriginalPosition;
                     popupUIController.yesButton.onClick.AddListener(popupUIController.ChangeText);
+                    popupUIController.yesButton.onClick.RemoveListener(TeleportButton);
                 }
 
                 // 이상 이동
-                if (repeat < loop)
+                if (_cliked < loop)
                 {
-                    float randomX = Random.Range(-popupRect.rect.width / 2 + YesbuttonRect.rect.width / 2, popupRect.rect.width / 2 - YesbuttonRect.rect.width / 2);
-                    float randomY = Random.Range(-popupRect.rect.height / 2 + YesbuttonRect.rect.height / 2, popupRect.rect.height / 2 - YesbuttonRect.rect.height / 2);
-                    YesbuttonRect.anchoredPosition = new Vector2(randomX, randomY);
+                    float randomX = Random.Range(-popupRect.rect.width / 2 + yesButtonRect.rect.width / 2, popupRect.rect.width / 2 - yesButtonRect.rect.width / 2);
+                    float randomY = Random.Range(-popupRect.rect.height / 2 + yesButtonRect.rect.height / 2, popupRect.rect.height / 2 - yesButtonRect.rect.height / 2);
+                    yesButtonRect.anchoredPosition = new Vector2(randomX, randomY);
 
-                    repeat++;
                 }
+                _cliked++;
+            }
+        }
+
+        public void ChangneButtonsPosition()
+        {
+            if (popupUIController.dialogueIndex == indexChangePosition)
+            {
+                Debug.Log("자리를 바꿔라");
+                popupAnimator.SetTrigger(_hashChagneButtonPos);
             }
         }
     }
