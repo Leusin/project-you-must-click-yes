@@ -235,8 +235,8 @@ MonoBehaviour:
   popupRect: {fileID: 1716333429}
   yesButtonRect: {fileID: 1448033320}
   _cliked: 0
-  indexChangePosition: 6
-  indexCheckBox: 8
+  _indexChangePosition: 5
+  _indexCheckBox: 7
   _toggle: {fileID: 1548861306}
 --- !u!4 &1181849165
 Transform:
@@ -727,7 +727,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7687443248492164773, guid: 9fa0d2406cbd2284fad87e21b5373a33, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8177125683832279528, guid: 9fa0d2406cbd2284fad87e21b5373a33, type: 3}
       propertyPath: nextLevel
