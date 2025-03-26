@@ -9,8 +9,8 @@ namespace ProjectYouMustClickYes
         public PopupUIController popupUIController;
 
         [Header("Teleport Button")]
-        [SerializeField] private int indexButtonTeleport = 2;
-        [SerializeField] private int loop = 3; // 이동 횟수
+        [SerializeField] private int indexButtonTeleport = 3;
+        [SerializeField] private int loop = 4; // 이동 횟수
         [SerializeField] private Mask popupMask;
         [SerializeField] private Animator popupAnimator;
         [SerializeField] private RectTransform popupRect;
@@ -19,10 +19,13 @@ namespace ProjectYouMustClickYes
         [SerializeField] private int _cliked = 0; // 이동 횟수
 
         [Header("Changne Buttons Position")]
-        [SerializeField] private int indexChangePosition = 7;
+        [SerializeField] private int _indexChangePosition = 5;
         readonly int _hashChagneButtonPos = Animator.StringToHash("chagne_button_pos");
+        readonly int _hashEndCheckbox = Animator.StringToHash("end_checkbox");
 
-        //[Header("Check Box")]
+        [Header("Check Box")]
+        [SerializeField] private int _indexCheckBox = 7;
+        [SerializeField] private Toggle _toggle;
         //[Header("Upside Down")]
         //[Header("Move Like Screensaver")]
         //[Header("Text Sake")]
@@ -73,11 +76,35 @@ namespace ProjectYouMustClickYes
 
         public void ChangneButtonsPosition()
         {
-            if (popupUIController.dialogueIndex == indexChangePosition)
+            if (popupUIController.dialogueIndex == _indexChangePosition)
             {
-                Debug.Log("자리를 바꿔라");
                 popupAnimator.SetTrigger(_hashChagneButtonPos);
             }
+        }
+
+        public void Checkbox()
+        {
+            if (popupUIController.dialogueIndex == _indexCheckBox)
+            {
+                popupRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 236);
+                _toggle.gameObject.SetActive(true);
+            }
+
+            if (popupUIController.dialogueIndex > _indexCheckBox)
+            {
+                popupUIController.yesButton.onClick.RemoveListener(Checkbox);
+
+                popupRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 220);
+                _toggle.gameObject.SetActive(false);
+
+            }
+        }
+
+        public void EndCheckbox()
+        {
+            popupAnimator.SetTrigger(_hashEndCheckbox);
+            _toggle.interactable = false;
+            popupUIController.StartCoroutine(popupUIController.WaitForAnimationAndLoadScene("Start"));
         }
     }
 }

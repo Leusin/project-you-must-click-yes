@@ -90,9 +90,9 @@ namespace ProjectYouMustClickYes
         }
 
         // 마무리 애니메이션이 끝날 때까지 기다린 후 레벨 이동
-        IEnumerator WaitForAnimationAndLoadScene(string sceneName)
+        public IEnumerator WaitForAnimationAndLoadScene(string sceneName)
         {
-            yield return new WaitForSeconds(4.0f);
+            yield return new WaitForSeconds(4.4f);
 
             SceneManager.LoadScene(sceneName);
         }
