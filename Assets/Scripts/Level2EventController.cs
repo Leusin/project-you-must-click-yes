@@ -16,23 +16,30 @@ namespace ProjectYouMustClickYes
         [SerializeField] private RectTransform popupRect;
         [SerializeField] private RectTransform yesButtonRect;
         private Vector2 yesOriginalPosition; // 버튼의 원래 위치
-        [SerializeField] private int _cliked = 0; // 이동 횟수
+        [SerializeField] private int _clicked = 0; // 이동 횟수
 
         [Header("Changne Buttons Position")]
         [SerializeField] private int _indexChangePosition = 5;
-        readonly int _hashChagneButtonPos = Animator.StringToHash("chagne_button_pos");
-        readonly int _hashEndCheckbox = Animator.StringToHash("end_checkbox");
+        readonly int _hashChagneButtonPos = Animator.StringToHash("event_chagne_buttons_pos");
+        readonly int _hashEndCheckbox = Animator.StringToHash("evenet_end_checkbox");
+        readonly int _hashShowReversed = Animator.StringToHash("event_show_reversed");
 
         [Header("Check Box")]
-        [SerializeField] private int _indexCheckBox = 7;
+        [SerializeField] private int _indexCheckBox = 6;
         [SerializeField] private Toggle _toggle;
-        //[Header("Upside Down")]
-        //[Header("Move Like Screensaver")]
+
+        [Header("Upside Down")]
+        [SerializeField] private int _indexUpsideDown = 7;
+        
+        [Header("Move Like Screensaver")]
+        [SerializeField] private GameObject window;
+        
         //[Header("Text Sake")]
 
         void Start()
         {
             yesOriginalPosition = yesButtonRect.anchoredPosition;
+            popupAnimator.applyRootMotion = false;
         }
 
         public void TeleportButton()
@@ -46,14 +53,14 @@ namespace ProjectYouMustClickYes
             // 조건 인덱스 때
             if (popupUIController.dialogueIndex == indexButtonTeleport)
             {
-                if (_cliked == 0)
+                if (_clicked == 0)
                 {
                     popupMask.enabled = false;
                     popupAnimator.enabled = false;
                 }
 
                 // 마무리
-                if (_cliked == loop)
+                if (_clicked == loop)
                 {
                     popupMask.enabled = true;
                     popupAnimator.enabled = true;
@@ -63,14 +70,14 @@ namespace ProjectYouMustClickYes
                 }
 
                 // 이상 이동
-                if (_cliked < loop)
+                if (_clicked < loop)
                 {
                     float randomX = Random.Range(-popupRect.rect.width / 2 + yesButtonRect.rect.width / 2, popupRect.rect.width / 2 - yesButtonRect.rect.width / 2);
                     float randomY = Random.Range(-popupRect.rect.height / 2 + yesButtonRect.rect.height / 2, popupRect.rect.height / 2 - yesButtonRect.rect.height / 2);
                     yesButtonRect.anchoredPosition = new Vector2(randomX, randomY);
 
                 }
-                _cliked++;
+                _clicked++;
             }
         }
 
@@ -105,6 +112,20 @@ namespace ProjectYouMustClickYes
             popupAnimator.SetTrigger(_hashEndCheckbox);
             _toggle.interactable = false;
             popupUIController.StartCoroutine(popupUIController.WaitForAnimationAndLoadScene("Start"));
+        }
+
+        public void UpsideDown()
+        {
+            if (popupUIController.dialogueIndex == _indexUpsideDown)
+            {
+                popupAnimator.SetTrigger(_hashShowReversed);
+            }
+
+            if (popupUIController.dialogueIndex > _indexUpsideDown)
+            {
+                //popupAnimator.SetTrigger(_hashShowReversed);
+                popupUIController.yesButton.onClick.RemoveListener(UpsideDown);
+            }
         }
     }
 }
