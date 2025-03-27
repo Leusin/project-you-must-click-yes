@@ -77,6 +77,7 @@ namespace ProjectYouMustClickYes
         {
             if (dialogueIndex < dialogues.Count - 1)
             {
+                // n 초 후 인덱스가 바뀌도록 변경
                 dialogueIndex++;
 
                 StartCoroutine(ChangeTextAfterAnimation());

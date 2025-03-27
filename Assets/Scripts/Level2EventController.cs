@@ -30,10 +30,11 @@ namespace ProjectYouMustClickYes
 
         [Header("Upside Down")]
         [SerializeField] private int _indexUpsideDown = 7;
-        
+
         [Header("Move Like Screensaver")]
-        [SerializeField] private GameObject window;
-        
+        [SerializeField] private int _indexOffScreenSaverMove = 8;
+        [SerializeField] private ScreensaverMove _screenSaverMover;
+
         //[Header("Text Sake")]
 
         void Start()
@@ -67,6 +68,9 @@ namespace ProjectYouMustClickYes
                     yesButtonRect.anchoredPosition = yesOriginalPosition;
                     popupUIController.yesButton.onClick.AddListener(popupUIController.ChangeText);
                     popupUIController.yesButton.onClick.RemoveListener(TeleportButton);
+
+                    // 임시로 넣어봄. 어쩌면 그대로 둘 수도 있음
+                    _screenSaverMover.enabled = true;
                 }
 
                 // 이상 이동
@@ -75,7 +79,6 @@ namespace ProjectYouMustClickYes
                     float randomX = Random.Range(-popupRect.rect.width / 2 + yesButtonRect.rect.width / 2, popupRect.rect.width / 2 - yesButtonRect.rect.width / 2);
                     float randomY = Random.Range(-popupRect.rect.height / 2 + yesButtonRect.rect.height / 2, popupRect.rect.height / 2 - yesButtonRect.rect.height / 2);
                     yesButtonRect.anchoredPosition = new Vector2(randomX, randomY);
-
                 }
                 _clicked++;
             }
@@ -123,8 +126,16 @@ namespace ProjectYouMustClickYes
 
             if (popupUIController.dialogueIndex > _indexUpsideDown)
             {
-                //popupAnimator.SetTrigger(_hashShowReversed);
                 popupUIController.yesButton.onClick.RemoveListener(UpsideDown);
+            }
+        }
+
+        public void ScreensaverMove()
+        {
+            if (popupUIController.dialogueIndex == _indexOffScreenSaverMove)
+            {
+                _screenSaverMover.enabled = false;
+                popupUIController.yesButton.onClick.RemoveListener(ScreensaverMove);
             }
         }
     }
