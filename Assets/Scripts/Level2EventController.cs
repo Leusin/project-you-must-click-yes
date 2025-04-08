@@ -35,7 +35,9 @@ namespace ProjectYouMustClickYes
         [SerializeField] private int _indexOffScreenSaverMove = 8;
         [SerializeField] private ScreensaverMove _screenSaverMover;
 
-        //[Header("Text Sake")]
+        [Header("Text Sake")]
+        [SerializeField] private int _indexTextShake = 10;
+        [SerializeField] private VertexJitter _vertexJitter;
 
         void Start()
         {
@@ -136,6 +138,14 @@ namespace ProjectYouMustClickYes
             {
                 _screenSaverMover.enabled = false;
                 popupUIController.yesButton.onClick.RemoveListener(ScreensaverMove);
+            }
+        }
+
+        public void ShakeTexts()
+        {
+            if (popupUIController.dialogueIndex == _indexTextShake)
+            {
+                _vertexJitter.enabled = true;
             }
         }
     }

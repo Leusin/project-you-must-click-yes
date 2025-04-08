@@ -66,7 +66,7 @@ namespace ProjectYouMustClickYes
                 }
                 else
                 {
-                    dialogues.Add(SceneManager.GetActiveScene().name);
+                    //dialogues.Add(SceneManager.GetActiveScene().name);
                     Debug.LogError("해당 씬에 대한 대화 데이터가 없습니다.");
                 }
             }
