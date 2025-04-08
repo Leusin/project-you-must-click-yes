@@ -16,6 +16,7 @@ namespace ProjectYouMustClickYes
         public Button yesButton;
         public string nextLevel;
         public int dialogueIndex = 0;
+        public UnityEvent changeIndex;
         public List<string> dialogues = new List<string>();
 
         public UnityEvent OnChangeTextEvnet;
@@ -104,6 +105,8 @@ namespace ProjectYouMustClickYes
             yield return new WaitForSeconds(_animator.GetCurrentAnimatorStateInfo(0).length + 0.2f);
 
             dialogueIndex++;
+            changeIndex?.Invoke();
+            
             // 텍스트 변경
             OnChangeTextEvnet?.Invoke();
             dialogueText.text = dialogues[dialogueIndex];
