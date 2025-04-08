@@ -239,7 +239,7 @@ MonoBehaviour:
   _indexCheckBox: 6
   _toggle: {fileID: 1548861306}
   _indexUpsideDown: 7
-  _indexOffScreenSaverMove: 9
+  _indexOffScreenSaverMove: 4
   _screenSaverMover: {fileID: 1370903834}
   _indexTextShake: 10
   _vertexJitter: {fileID: 1759571265}

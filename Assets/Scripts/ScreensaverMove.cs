@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace ProjectYouMustClickYes
@@ -12,14 +13,25 @@ namespace ProjectYouMustClickYes
 
         public Vector2 direction = new Vector2(0.4444f, 0.666f);
 
+        private Coroutine _moveBackCoroutine;
+        
         void Awake()
         {
             _rect = gameObject.GetComponent<RectTransform>();
         }
 
+        void Onable()
+        {
+            if (_moveBackCoroutine != null)
+            {
+                StopCoroutine(_moveBackCoroutine);
+                _moveBackCoroutine = null;
+            }            
+        }
+
         void OnDisable()
         {
-            _rect.anchoredPosition = new Vector2(0f, 0f);
+            _moveBackCoroutine = StartCoroutine(MoveBackToOriginAndDisable());
         }
 
         void Update()
@@ -57,6 +69,23 @@ namespace ProjectYouMustClickYes
                 _rect.anchoredPosition = new Vector2(currentPos.x,
                     Mathf.Clamp(currentPos.y, minBounds.y, maxBounds.y));
             }
+        }
+
+        IEnumerator MoveBackToOriginAndDisable()
+        {
+            Vector2 start = _rect.anchoredPosition;
+            Vector2 target = Vector2.zero;
+            float time = 0f;
+            float duration = 1.25f;
+
+            while (time < duration)
+            {
+                _rect.anchoredPosition = Vector2.Lerp(start, target, time / duration);
+                time += Time.unscaledDeltaTime;
+                yield return null;
+            }
+
+            _rect.anchoredPosition = target;
         }
     }
 }
