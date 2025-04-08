@@ -77,9 +77,6 @@ namespace ProjectYouMustClickYes
         {
             if (dialogueIndex < dialogues.Count - 1)
             {
-                // n 초 후 인덱스가 바뀌도록 변경
-                dialogueIndex++;
-
                 StartCoroutine(ChangeTextAfterAnimation());
             }
             else
@@ -106,6 +103,7 @@ namespace ProjectYouMustClickYes
             // 애니메이션이 끝날 때까지 대기 (애니메이션 클립 길이에 맞게 설정)
             yield return new WaitForSeconds(_animator.GetCurrentAnimatorStateInfo(0).length + 0.2f);
 
+            dialogueIndex++;
             // 텍스트 변경
             OnChangeTextEvnet?.Invoke();
             dialogueText.text = dialogues[dialogueIndex];
