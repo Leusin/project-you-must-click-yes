@@ -552,7 +552,7 @@ MonoBehaviour:
     m_SelectedColor: {r: 0.17254902, g: 0.9607844, b: 0.4156863, a: 1}
     m_DisabledColor: {r: 0.83921576, g: 0.83921576, b: 0.83921576, a: 1}
     m_ColorMultiplier: 1
-    m_FadeDuration: 0.25
+    m_FadeDuration: 0.2
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
@@ -1107,7 +1107,7 @@ MonoBehaviour:
     m_SelectedColor: {r: 0.9607844, g: 0.30980393, b: 0.43529415, a: 1}
     m_DisabledColor: {r: 0.83921576, g: 0.83921576, b: 0.83921576, a: 1}
     m_ColorMultiplier: 1
-    m_FadeDuration: 0.25
+    m_FadeDuration: 0.2
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}

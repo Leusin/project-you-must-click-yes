@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,7 +20,7 @@ namespace ProjectYouMustClickYes
         [SerializeField] private int _clicked = 0; // 이동 횟수
 
         [Header("Changne Buttons Position")]
-        [SerializeField] private int _indexChangePosition = 5;
+        [SerializeField] private int[] _indexChangePositions;
         readonly int _hashChagneButtonPos = Animator.StringToHash("event_chagne_buttons_pos");
         readonly int _hashEndCheckbox = Animator.StringToHash("evenet_end_checkbox");
         readonly int _hashShowReversed = Animator.StringToHash("event_show_reversed");
@@ -78,8 +79,8 @@ namespace ProjectYouMustClickYes
                 // 이상 이동
                 if (_clicked < loop)
                 {
-                    float randomX = Random.Range(-popupRect.rect.width / 2 + yesButtonRect.rect.width / 2, popupRect.rect.width / 2 - yesButtonRect.rect.width / 2);
-                    float randomY = Random.Range(-popupRect.rect.height / 2 + yesButtonRect.rect.height / 2, popupRect.rect.height / 2 - yesButtonRect.rect.height / 2);
+                    float randomX = UnityEngine.Random.Range(-popupRect.rect.width / 2 + yesButtonRect.rect.width / 2, popupRect.rect.width / 2 - yesButtonRect.rect.width / 2);
+                    float randomY = UnityEngine.Random.Range(-popupRect.rect.height / 2 + yesButtonRect.rect.height / 2, popupRect.rect.height / 2 - yesButtonRect.rect.height / 2);
                     yesButtonRect.anchoredPosition = new Vector2(randomX, randomY);
                 }
                 _clicked++;
@@ -88,9 +89,12 @@ namespace ProjectYouMustClickYes
 
         public void ChangneButtonsPosition()
         {
-            if (popupUIController.dialogueIndex == _indexChangePosition)
+            foreach(int i in _indexChangePositions)
             {
-                popupAnimator.SetTrigger(_hashChagneButtonPos);
+                if (popupUIController.dialogueIndex == i)
+                {
+                    popupAnimator.SetTrigger(_hashChagneButtonPos);
+                }
             }
         }
 
