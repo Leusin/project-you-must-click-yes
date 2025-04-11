@@ -36,6 +36,7 @@ namespace ProjectYouMustClickYes
             LoadDialogues();
 
             yesButton.onClick.AddListener(ChangeText);
+            noButton.onClick.AddListener(MoveNoButtonAboveYes);
             noButton.onClick.AddListener(() => { _animator.SetTrigger(_hashEndNo); });
             noButton.onClick.AddListener(() => { StartCoroutine(WaitForAnimationAndLoadScene("Start")); });
 

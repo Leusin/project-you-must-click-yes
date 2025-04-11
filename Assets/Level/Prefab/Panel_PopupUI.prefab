@@ -253,8 +253,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8831875023218020394}
-  - {fileID: 5570968462370443086}
   - {fileID: 2912674831375155680}
+  - {fileID: 5570968462370443086}
   - {fileID: 5676827933291046057}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -318,6 +318,9 @@ MonoBehaviour:
   yesButton: {fileID: 8561416338969349548}
   nextLevel: 
   dialogueIndex: 0
+  changeIndex:
+    m_PersistentCalls:
+      m_Calls: []
   dialogues: []
   OnChangeTextEvnet:
     m_PersistentCalls:
