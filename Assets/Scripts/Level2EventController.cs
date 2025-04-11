@@ -20,7 +20,7 @@ namespace ProjectYouMustClickYes
         [SerializeField] private int _clicked = 0; // 이동 횟수
 
         [Header("Changne Buttons Position")]
-        [SerializeField] private int[] _indexChangePositions;
+        [SerializeField] private int[] _indexesChangePosition = { 0, 4 };
         readonly int _hashChagneButtonPos = Animator.StringToHash("event_chagne_buttons_pos");
         readonly int _hashEndCheckbox = Animator.StringToHash("evenet_end_checkbox");
         readonly int _hashShowReversed = Animator.StringToHash("event_show_reversed");
@@ -37,7 +37,8 @@ namespace ProjectYouMustClickYes
         [SerializeField] private ScreensaverMove _screenSaverMover;
 
         [Header("Text Sake")]
-        [SerializeField] private int _indexTextShake = 10;
+        [SerializeField] private int[] _indexesTextShake = { 10, 11, 12 };
+        [SerializeField] private int[] _ShakeCurveScale = { 4, 8, 13 };
         [SerializeField] private VertexJitter _vertexJitter;
 
         void Start()
@@ -89,7 +90,7 @@ namespace ProjectYouMustClickYes
 
         public void ChangneButtonsPosition()
         {
-            foreach(int i in _indexChangePositions)
+            foreach (int i in _indexesChangePosition)
             {
                 if (popupUIController.dialogueIndex == i)
                 {
@@ -147,9 +148,16 @@ namespace ProjectYouMustClickYes
 
         public void ShakeTexts()
         {
-            if (popupUIController.dialogueIndex == _indexTextShake)
+            _vertexJitter.enabled = false;
+
+            for (int i = 0; i < _indexesTextShake.Length; i++)
             {
-                _vertexJitter.enabled = true;
+                if (popupUIController.dialogueIndex == _indexesTextShake[i])
+                {
+                    _vertexJitter.enabled = true;
+                    _vertexJitter.curveScale = _ShakeCurveScale[i];
+                    break;
+                }
             }
         }
     }
