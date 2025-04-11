@@ -7,6 +7,8 @@ namespace ProjectYouMustClickYes
     public class Level2EventController : MonoBehaviour
     {
         [Header("Setting")]
+        public string nextLevel = "Level3";
+        public SceneController sceneController;
         public PopupUIController popupUIController;
 
         [Header("Teleport Button")]
@@ -43,8 +45,30 @@ namespace ProjectYouMustClickYes
 
         void Start()
         {
+            // 이벤트 관련 변수 초기화
             yesOriginalPosition = yesButtonRect.anchoredPosition;
             popupAnimator.applyRootMotion = false;
+
+            // 씬 이동
+            popupUIController.OnLoopEnd.AddListener(() => popupUIController.StartCoroutine(CoroutineUtil.WaitFor(4.5f, () => sceneController.LoadSceneWithTransition(nextLevel))));
+            popupUIController.noButton.onClick.AddListener(() => popupUIController.StartCoroutine(CoroutineUtil.WaitFor(4.5f, () => sceneController.LoadSceneWithTransition("Start"))));
+
+            // 체크박스 버튼 할당
+            popupUIController.checkBox.onValueChanged.AddListener(value =>
+                {
+                    if (value)
+                    {
+                        sceneController.LoadSceneWithTransition("Start");
+                    }
+                });
+
+            // 이벤트 할당
+            popupUIController.yesButton.onClick.AddListener(TeleportButton);
+            popupUIController.yesButton.onClick.AddListener(ChangneButtonsPosition);
+            popupUIController.OnChangeTextEvnet.AddListener(Checkbox);
+            popupUIController.OnChangeTextEvnet.AddListener(UpsideDown);
+            popupUIController.OnChangeTextEvnet.AddListener(ScreensaverMove);
+            popupUIController.OnChangeTextEvnet.AddListener(ShakeTexts);
         }
 
         public void TeleportButton()
@@ -53,6 +77,7 @@ namespace ProjectYouMustClickYes
             if (popupUIController.dialogueIndex == indexButtonTeleport - 1)
             {
                 popupUIController.yesButton.onClick.RemoveListener(popupUIController.ChangeText);
+                popupUIController.MoveYesButtonAboveNo();
             }
 
             // 조건 인덱스 때
@@ -121,7 +146,7 @@ namespace ProjectYouMustClickYes
         {
             popupAnimator.SetTrigger(_hashEndCheckbox);
             _toggle.interactable = false;
-            popupUIController.StartCoroutine(popupUIController.WaitForAnimationAndLoadScene("Start"));
+            popupUIController.StartCoroutine(CoroutineUtil.WaitFor(4.5f, () => sceneController.LoadSceneWithTransition("Start")));
         }
 
         public void UpsideDown()

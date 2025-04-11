@@ -14,9 +14,10 @@ namespace ProjectYouMustClickYes
         public TextMeshProUGUI dialogueText;
         public Button noButton;
         public Button yesButton;
-        public string nextLevel;
+        public Toggle checkBox;
         public int dialogueIndex = 0;
         public UnityEvent changeIndex;
+        public UnityEvent OnLoopEnd;
         public List<string> dialogues = new List<string>();
 
         public UnityEvent OnChangeTextEvnet;
@@ -38,12 +39,13 @@ namespace ProjectYouMustClickYes
             yesButton.onClick.AddListener(ChangeText);
             noButton.onClick.AddListener(MoveNoButtonAboveYes);
             noButton.onClick.AddListener(() => { _animator.SetTrigger(_hashEndNo); });
-            noButton.onClick.AddListener(() => { StartCoroutine(WaitForAnimationAndLoadScene("Start")); });
 
             if (dialogues.Count > 0)
             {
                 dialogueText.text = dialogues[0];
             }
+
+            StartCoroutine(PlayAfterDelay(1.5f, "Show Popup"));
         }
 
         private void OnDestroy()
@@ -85,16 +87,8 @@ namespace ProjectYouMustClickYes
             {
                 // 마무리 애니메이션 실행
                 _animator.SetTrigger(_hashEndYes);
-                StartCoroutine(WaitForAnimationAndLoadScene(nextLevel));
+                OnLoopEnd?.Invoke();
             }
-        }
-
-        // 마무리 애니메이션이 끝날 때까지 기다린 후 레벨 이동
-        public IEnumerator WaitForAnimationAndLoadScene(string sceneName)
-        {
-            yield return new WaitForSeconds(4.4f);
-
-            SceneManager.LoadScene(sceneName);
         }
 
         IEnumerator ChangeTextAfterAnimation()
@@ -103,14 +97,17 @@ namespace ProjectYouMustClickYes
             _animator.SetTrigger(_hashLoopYes);
 
             // 애니메이션이 끝날 때까지 대기 (애니메이션 클립 길이에 맞게 설정)
-            yield return new WaitForSeconds(_animator.GetCurrentAnimatorStateInfo(0).length + 0.2f);
+            yield return new WaitForSeconds(_animator.GetCurrentAnimatorStateInfo(0).length + 0.25f);
 
             dialogueIndex++;
             changeIndex?.Invoke();
-            
+
             // 텍스트 변경
             OnChangeTextEvnet?.Invoke();
             dialogueText.text = dialogues[dialogueIndex];
+
+            // 버튼 선택 해제
+            UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
         }
 
         // 예 버튼을 위로 바꾸는 함수
@@ -126,6 +123,13 @@ namespace ProjectYouMustClickYes
             //yesButton.transform.SetAsFirstSibling();
             noButton.transform.SetAsLastSibling();
 
+        }
+
+
+        IEnumerator PlayAfterDelay(float delay, string stateName)
+        {
+            yield return new WaitForSeconds(delay);
+            _animator.Play(stateName);
         }
     }
 }

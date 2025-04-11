@@ -6,6 +6,8 @@ namespace ProjectYouMustClickYes
     public class Level1EventController : MonoBehaviour
     {
         [Header("Setting")]
+        public string nextLevel = "Level2";
+        public SceneController sceneController;
         public PopupUIController popupUIController;
 
         [Header("Emerge No Button")]
@@ -13,6 +15,11 @@ namespace ProjectYouMustClickYes
 
         private void Start()
         {
+            // 씬 이동
+            popupUIController.OnLoopEnd.AddListener(() => popupUIController.StartCoroutine(CoroutineUtil.WaitFor(4.5f, () => sceneController.LoadSceneWithTransition(nextLevel))));
+            popupUIController.noButton.onClick.AddListener(() => popupUIController.StartCoroutine(CoroutineUtil.WaitFor(4.5f, () => sceneController.LoadSceneWithTransition("Start"))));
+
+            // 이벤트 할당
             popupUIController.OnChangeTextEvnet.AddListener(ChangeTextEvnet);
         }
 

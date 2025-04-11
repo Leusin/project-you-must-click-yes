@@ -316,9 +316,12 @@ MonoBehaviour:
   dialogueText: {fileID: 159464385445318559}
   noButton: {fileID: 5013393311327345559}
   yesButton: {fileID: 8561416338969349548}
-  nextLevel: 
+  checkBox: {fileID: 1057061564102941706}
   dialogueIndex: 0
   changeIndex:
+    m_PersistentCalls:
+      m_Calls: []
+  OnLoopEnd:
     m_PersistentCalls:
       m_Calls: []
   dialogues: []
@@ -546,9 +549,9 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.17254902, g: 0.9607844, b: 0.4156863, a: 1}
+    m_NormalColor: {r: 0.83921576, g: 0.83921576, b: 0.83921576, a: 1}
     m_HighlightedColor: {r: 0.15686275, g: 0.92549026, b: 0.40000004, a: 1}
-    m_PressedColor: {r: 0.15686275, g: 0.92549026, b: 0.40000004, a: 0.5647059}
+    m_PressedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     m_SelectedColor: {r: 0.17254902, g: 0.9607844, b: 0.4156863, a: 1}
     m_DisabledColor: {r: 0.83921576, g: 0.83921576, b: 0.83921576, a: 1}
     m_ColorMultiplier: 1
@@ -1101,9 +1104,9 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.9607844, g: 0.30980393, b: 0.43529415, a: 1}
+    m_NormalColor: {r: 0.83921576, g: 0.83921576, b: 0.83921576, a: 1}
     m_HighlightedColor: {r: 0.92549026, g: 0.29803923, b: 0.41960788, a: 1}
-    m_PressedColor: {r: 0.92549026, g: 0.29803923, b: 0.41960788, a: 1}
+    m_PressedColor: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
     m_SelectedColor: {r: 0.9607844, g: 0.30980393, b: 0.43529415, a: 1}
     m_DisabledColor: {r: 0.83921576, g: 0.83921576, b: 0.83921576, a: 1}
     m_ColorMultiplier: 1
