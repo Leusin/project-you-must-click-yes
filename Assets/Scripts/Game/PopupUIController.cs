@@ -65,10 +65,10 @@ namespace ProjectYouMustClickYes
 
         void LoadDialogues()
         {
-            string path = Path.Combine(Application.streamingAssetsPath, "dialogues.json");
-            if (File.Exists(path))
+            TextAsset jsonAsset = Resources.Load<TextAsset>("Data/dialogues_kr");
+            if (jsonAsset != null)
             {
-                string json = File.ReadAllText(path);
+                string json = jsonAsset.text;
                 DialogueData data = JsonUtility.FromJson<DialogueData>(json);
 
                 DialogueEntry entry = data.dialogues.Find(d => d.sceneName == SceneManager.GetActiveScene().name);
