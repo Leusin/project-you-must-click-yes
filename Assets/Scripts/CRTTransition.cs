@@ -50,7 +50,7 @@ namespace ProjectYouMustClickYes
             {
                 float t = time / duration;
 
-                chromatic.intensity.value = Mathf.Lerp(0.369f, 1f, t);
+                chromatic.intensity.value = Mathf.Lerp(0.183f, 1f, t);
                 vignette.intensity.value = Mathf.Lerp(0.45f, 1f, t);
                 distortion.intensity.value = Mathf.Lerp(0.25f, -1f, t);;
                 distortion.scale.value = Mathf.Lerp(1f, 0.01f, t);
@@ -68,7 +68,7 @@ namespace ProjectYouMustClickYes
             while (time < duration)
             {
                 float t = time / duration;
-                chromatic.intensity.value = Mathf.Lerp(1f, 0.369f, t);
+                chromatic.intensity.value = Mathf.Lerp(1f, 0.183f, t);
                 vignette.intensity.value = Mathf.Lerp(1f, 0.45f, t);
                 distortion.intensity.value = Mathf.Lerp(-1f, 0.25f, t);
                 distortion.scale.value = Mathf.Lerp(0.01f, 1f, t);

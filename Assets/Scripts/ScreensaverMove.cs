@@ -9,7 +9,8 @@ namespace ProjectYouMustClickYes
         private RectTransform _rect;
         public RectTransform popupRect;
         public RectTransform canvasRect; // UI 전체 크기
-        public Vector2 speed = new Vector2(100f, 80f); // 이동 속도
+        private Vector2 startSpeed;
+        public Vector2 speed = new Vector2(120f, 800f); // 이동 속도
 
         public Vector2 direction = new Vector2(0.4444f, 0.666f);
 
@@ -18,6 +19,11 @@ namespace ProjectYouMustClickYes
         void Awake()
         {
             _rect = gameObject.GetComponent<RectTransform>();
+        }
+
+        void Start()
+        {
+            startSpeed = speed;
         }
 
         void Onable()
@@ -69,6 +75,16 @@ namespace ProjectYouMustClickYes
                 _rect.anchoredPosition = new Vector2(currentPos.x,
                     Mathf.Clamp(currentPos.y, minBounds.y, maxBounds.y));
             }
+        }
+
+        public void DoubleSpeed()
+        {
+            speed *= 2;
+        }
+
+        public void ResetSpeed()
+        {
+            speed = startSpeed;
         }
 
         IEnumerator MoveBackToOriginAndDisable()

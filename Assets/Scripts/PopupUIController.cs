@@ -35,8 +35,17 @@ namespace ProjectYouMustClickYes
         void Start()
         {
             LoadDialogues();
+            string sceneName = SceneManager.GetActiveScene().name;
+
+            TMP_Text yesText = yesButton.GetComponentInChildren<TMP_Text>();
+            TMP_Text noText = noButton.GetComponentInChildren<TMP_Text>();
+
+            yesText.text = (DialogueManager.Instance.currentLang == Language.KR) ? "예" : "Yes";
+            noText.text = (DialogueManager.Instance.currentLang == Language.KR) ? "아니오" : "No";
 
             yesButton.onClick.AddListener(ChangeText);
+
+            noButton.onClick.AddListener(SoundManager.Instance.PlayNo);
             noButton.onClick.AddListener(MoveNoButtonAboveYes);
             noButton.onClick.AddListener(() => { _animator.SetTrigger(_hashEndNo); });
 
@@ -47,7 +56,7 @@ namespace ProjectYouMustClickYes
 
             StartCoroutine(PlayAfterDelay(1.5f, "Show Popup"));
         }
-
+        
         private void OnDestroy()
         {
             yesButton.onClick.RemoveListener(ChangeText);
@@ -86,6 +95,7 @@ namespace ProjectYouMustClickYes
             else
             {
                 // 마무리 애니메이션 실행
+                SoundManager.Instance.PlayYes();
                 _animator.SetTrigger(_hashEndYes);
                 OnLoopEnd?.Invoke();
             }

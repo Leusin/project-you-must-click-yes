@@ -15,12 +15,15 @@ namespace ProjectYouMustClickYes
 
         private void Start()
         {
+            SoundManager.Instance.PlayBGM();
+
             // 씬 이동
             popupUIController.OnLoopEnd.AddListener(() => popupUIController.StartCoroutine(CoroutineUtil.WaitFor(4.5f, () => sceneController.LoadSceneWithTransition(nextLevel))));
             popupUIController.noButton.onClick.AddListener(() => popupUIController.StartCoroutine(CoroutineUtil.WaitFor(4.5f, () => sceneController.LoadSceneWithTransition("Start"))));
 
             // 이벤트 할당
             popupUIController.OnChangeTextEvnet.AddListener(ChangeTextEvnet);
+            popupUIController.noButton.gameObject.SetActive(false);
         }
 
         private void OnDestroy()

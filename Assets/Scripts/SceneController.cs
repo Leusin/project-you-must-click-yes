@@ -8,7 +8,7 @@ namespace ProjectYouMustClickYes
     {
         public CRTTransitionController transitionController;
         public GameObject loadingUI;
-
+        private bool _isTransitioning = false;
         public void Start()
         {
             loadingUI.SetActive(false);
@@ -17,6 +17,14 @@ namespace ProjectYouMustClickYes
 
         public void LoadSceneWithTransition(string nextScene)
         {
+            if (_isTransitioning)
+            {
+                return;
+            }
+
+            _isTransitioning = true;
+
+            SoundManager.Instance.PlayTransition();
             transitionController.PlayOut(() =>
             {
                 loadingUI.SetActive(true);  // 1. 트랜지션 끝나면 로딩 화면 보이기
@@ -52,6 +60,7 @@ namespace ProjectYouMustClickYes
 
             // 씬 활성화
             op.allowSceneActivation = true;
+            _isTransitioning = false;
         }
     }
 }

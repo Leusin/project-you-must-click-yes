@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -101,12 +100,12 @@ namespace ProjectYouMustClickYes
                     // 임시로 넣어봄. 어쩌면 그대로 둘 수도 있음
                     _screenSaverMover.enabled = true;
                 }
-
+                
                 // 이상 이동
                 if (_clicked < loop)
                 {
-                    float randomX = UnityEngine.Random.Range(-popupRect.rect.width / 2 + yesButtonRect.rect.width / 2, popupRect.rect.width / 2 - yesButtonRect.rect.width / 2);
-                    float randomY = UnityEngine.Random.Range(-popupRect.rect.height / 2 + yesButtonRect.rect.height / 2, popupRect.rect.height / 2 - yesButtonRect.rect.height / 2);
+                    float randomX = UnityEngine.Random.Range(-popupRect.rect.width / 1.5f + yesButtonRect.rect.width / 1.5f, popupRect.rect.width / 1.5f - yesButtonRect.rect.width / 2);
+                    float randomY = UnityEngine.Random.Range(-popupRect.rect.height / 1.5f + yesButtonRect.rect.height / 1.5f, popupRect.rect.height / 1.5f - yesButtonRect.rect.height / 2);
                     yesButtonRect.anchoredPosition = new Vector2(randomX, randomY);
                 }
                 _clicked++;
@@ -128,7 +127,7 @@ namespace ProjectYouMustClickYes
         {
             if (popupUIController.dialogueIndex == _indexCheckBox)
             {
-                popupRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 236);
+                //popupRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 236);
                 _toggle.gameObject.SetActive(true);
             }
 
@@ -136,7 +135,7 @@ namespace ProjectYouMustClickYes
             {
                 popupUIController.yesButton.onClick.RemoveListener(Checkbox);
 
-                popupRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 220);
+                //popupRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 220);
                 _toggle.gameObject.SetActive(false);
 
             }
@@ -168,6 +167,10 @@ namespace ProjectYouMustClickYes
             {
                 _screenSaverMover.enabled = false;
                 popupUIController.yesButton.onClick.RemoveListener(ScreensaverMove);
+            }
+            else if (popupUIController.dialogueIndex == _indexOffScreenSaverMove - 1)
+            {
+                _screenSaverMover.DoubleSpeed();
             }
         }
 
