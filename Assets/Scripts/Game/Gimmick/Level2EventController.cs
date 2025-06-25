@@ -1,13 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Leusin.Tools;
 
 namespace ProjectYouMustClickYes
 {
     public class Level2EventController : MonoBehaviour
     {
         [Header("Setting")]
-        public string nextLevel = "Level3";
-        public SceneController sceneController;
+        public string nextLevel = SceneName.Credit;
         public PopupUIController popupUIController;
 
         [Header("Teleport Button")]
@@ -49,15 +49,15 @@ namespace ProjectYouMustClickYes
             popupAnimator.applyRootMotion = false;
 
             // 씬 이동
-            popupUIController.OnLoopEnd.AddListener(() => popupUIController.StartCoroutine(CoroutineUtil.WaitFor(4.5f, () => sceneController.LoadSceneWithTransition(nextLevel))));
-            popupUIController.noButton.onClick.AddListener(() => popupUIController.StartCoroutine(CoroutineUtil.WaitFor(4.5f, () => sceneController.LoadSceneWithTransition("Start"))));
+            popupUIController.OnLoopEnd.AddListener(() => popupUIController.StartCoroutine(CoroutineUtil.WaitFor(4.5f, () => SceneTransitionManager.Instance.LoadSceneWithTransition(nextLevel))));
+            popupUIController.noButton.onClick.AddListener(() => popupUIController.StartCoroutine(CoroutineUtil.WaitFor(4.5f, () => SceneTransitionManager.Instance.LoadSceneWithTransition("Start"))));
 
             // 체크박스 버튼 할당
             popupUIController.checkBox.onValueChanged.AddListener(value =>
                 {
                     if (value)
                     {
-                        sceneController.LoadSceneWithTransition("Start");
+                        SceneTransitionManager.Instance.LoadSceneWithTransition(SceneName.Lobby);
                     }
                 });
 
@@ -145,7 +145,7 @@ namespace ProjectYouMustClickYes
         {
             popupAnimator.SetTrigger(_hashEndCheckbox);
             _toggle.interactable = false;
-            popupUIController.StartCoroutine(CoroutineUtil.WaitFor(4.5f, () => sceneController.LoadSceneWithTransition("Start")));
+            popupUIController.StartCoroutine(CoroutineUtil.WaitFor(4.5f, () => SceneTransitionManager.Instance.LoadSceneWithTransition(SceneName.Lobby)));
         }
 
         public void UpsideDown()

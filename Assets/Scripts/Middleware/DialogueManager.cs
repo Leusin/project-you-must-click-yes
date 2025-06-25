@@ -1,25 +1,53 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using Leusin.Tools;
 
 namespace ProjectYouMustClickYes
 {
-    public class DialogueManager : MonoBehaviour
+    public enum Language
     {
-        public static DialogueManager Instance;
-        public Language currentLang = Language.KR;
+        KR,
+        EN
+    }
 
-        void Awake()
+    public class DialogueManager : MonoBehaviourSingleton<DialogueManager>
+    {
+        public Language currentLang = Language.KR;
+        
+        public DialogueEntry LoadDialogueEntry()
         {
-            // 싱글턴 패턴
-            if (Instance == null)
+            string path = ResourcePaths.GetDialogue(currentLang);
+            TextAsset jsonAsset = Resources.Load<TextAsset>(path);
+
+            if (jsonAsset == null)
             {
-                Instance = this;
-                DontDestroyOnLoad(gameObject);
+                Debug.LogError($"리소스를 찾을 수 없습니다: {path}");
+                return null;
             }
-            else
+
+            DialogueData data;
+            try
             {
-                Destroy(gameObject);
+                data = JsonUtility.FromJson<DialogueData>(jsonAsset.text);
             }
+            catch (System.Exception e)
+            {
+                Debug.LogError($"JSON 파싱 오류: {e.Message}");
+                return null;
+            }
+
+            string currentSceneName = SceneManager.GetActiveScene().name;
+            DialogueEntry entry = data.dialogues.Find(d => d.sceneName == currentSceneName);
+
+            if (entry != null)
+            {
+                return entry;
+            }
+
+            Debug.LogError($"해당 씬({currentSceneName})에 대한 대화 데이터가 없습니다.");
+            return null;
         }
+
     }
 }

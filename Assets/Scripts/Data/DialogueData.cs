@@ -13,5 +13,6 @@ namespace ProjectYouMustClickYes
     {
         public string sceneName;
         public List<string> dialogueList;
+
     }
 }

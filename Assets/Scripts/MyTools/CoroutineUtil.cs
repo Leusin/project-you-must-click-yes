@@ -3,7 +3,7 @@ using UnityEngine;
 using System;
 using System.Collections;
 
-namespace ProjectYouMustClickYes
+namespace Leusin.Tools
 {
     public static class CoroutineUtil
     {

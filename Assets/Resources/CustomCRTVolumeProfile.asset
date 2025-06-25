@@ -461,7 +461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccf1aba9553839d41ae37dd52e9ebcce, type: 3}
   m_Name: MotionBlur
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   mode:
     m_OverrideState: 1
     m_Value: 0
@@ -484,7 +484,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
-  m_Name: CRTTransitionTest
+  m_Name: CustomCRTVolumeProfile
   m_EditorClassIdentifier: 
   components:
   - {fileID: 1247868777620691934}
@@ -650,7 +650,7 @@ MonoBehaviour:
   active: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0.369
+    m_Value: 0.183
 --- !u!114 &5762530381802164056
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -770,7 +770,7 @@ MonoBehaviour:
     m_Value: 0.45
   smoothness:
     m_OverrideState: 1
-    m_Value: 0.28
+    m_Value: 0.3
   rounded:
     m_OverrideState: 1
     m_Value: 0

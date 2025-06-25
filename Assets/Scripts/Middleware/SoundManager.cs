@@ -1,19 +1,17 @@
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using Leusin.Tools;
 
 namespace ProjectYouMustClickYes
 {
-    public class SoundManager : MonoBehaviour
+    public class SoundManager : MonoBehaviourSingleton<SoundManager>
     {
-        public static SoundManager Instance;
+        private AudioMixer _audioMixer;
 
-        public AudioMixer bgmMixer;
-
-        [Header("Audio Sources")]
-        public AudioSource bgmSource;
-        public AudioSource ambientSource;
-        public AudioSource sfxSource;
+        private AudioSource _bgmSource;
+        private AudioSource _ambientSource;
+        private AudioSource _sfxSource;
 
         [Header("Audio Clips")]
         public AudioClip mouseClickClip;
@@ -30,27 +28,22 @@ namespace ProjectYouMustClickYes
         public Sprite unmuteSprite;           // 사운드 켜짐 아이콘
         private bool isMuted = false;
 
-        void Awake()
+        protected override void OnAwake()
         {
-            // 싱글턴 패턴
-            if (Instance == null)
-            {
-                Instance = this;
-                DontDestroyOnLoad(gameObject);
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-        }
+            _audioMixer =  Resources.Load<AudioMixer>(ResourcePaths.MainAudioMixer);
 
+            _bgmSource = gameObject.AddComponent<AudioSource>();
+            _ambientSource = gameObject.AddComponent<AudioSource>();
+            _sfxSource = gameObject.AddComponent<AudioSource>();
+        }
+        
         void Start()
         {
-            bgmSource.outputAudioMixerGroup = bgmMixer.FindMatchingGroups("BGM")[0];
+            _bgmSource.outputAudioMixerGroup = _audioMixer.FindMatchingGroups(ResourcePaths.BgmGroup)[0];
 
-            bgmSource.volume = 0.1f;
-            ambientSource.volume = 0.1f;
-            sfxSource.volume = 0.1f;
+            _bgmSource.volume = 0.1f;
+            _ambientSource.volume = 0.1f;
+            _sfxSource.volume = 0.1f;
         }
 
         void Update()
@@ -70,17 +63,17 @@ namespace ProjectYouMustClickYes
         {
             if (bgmClip != null)
             {
-                bgmSource.clip = bgmClip;
-                bgmSource.loop = true;
-                bgmSource.Play();
+                _bgmSource.clip = bgmClip;
+                _bgmSource.loop = true;
+                _bgmSource.Play();
             }
         }
 
         public void StopBGM()
         {
-            if (bgmSource.isPlaying)
+            if (_bgmSource.isPlaying)
             {
-                bgmSource.Stop();
+                _bgmSource.Stop();
             }
         }
 
@@ -88,9 +81,9 @@ namespace ProjectYouMustClickYes
         {
             if (bgmClip != null)
             {
-                ambientSource.clip = ambientClip;
-                ambientSource.loop = true;
-                ambientSource.Play();
+                _ambientSource.clip = ambientClip;
+                _ambientSource.loop = true;
+                _ambientSource.Play();
             }
         }
 
@@ -98,7 +91,7 @@ namespace ProjectYouMustClickYes
         {
             if (clip != null)
             {
-                sfxSource.PlayOneShot(clip);
+                _sfxSource.PlayOneShot(clip);
             }
         }
 
@@ -115,9 +108,9 @@ namespace ProjectYouMustClickYes
         {
             isMuted = !isMuted;
 
-            bgmSource.mute = isMuted;
-            ambientSource.mute = isMuted;
-            sfxSource.mute = isMuted;
+            _bgmSource.mute = isMuted;
+            _ambientSource.mute = isMuted;
+            _sfxSource.mute = isMuted;
 
             UpdateButtonImage();
         }

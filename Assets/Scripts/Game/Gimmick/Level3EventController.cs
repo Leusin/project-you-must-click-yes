@@ -1,4 +1,5 @@
 using UnityEngine;
+using Leusin.Tools;
 
 namespace ProjectYouMustClickYes
 {
@@ -6,8 +7,7 @@ namespace ProjectYouMustClickYes
     public class Level3EventController : MonoBehaviour
     {
         [Header("Setting")]
-        public string nextLevel = "Start";
-        public SceneController sceneController;
+        public string nextLevel = SceneName.Lobby;
         public PopupUIController popupUIController;
 
         private void Start()
@@ -16,9 +16,8 @@ namespace ProjectYouMustClickYes
             SoundManager.Instance.StopBGM();
 
             // 씬 이동
-            popupUIController.OnLoopEnd.AddListener(() => popupUIController.StartCoroutine(CoroutineUtil.WaitFor(4.5f, () => sceneController.LoadSceneWithTransition(nextLevel))));
-            popupUIController.noButton.onClick.AddListener(() => popupUIController.StartCoroutine(CoroutineUtil.WaitFor(4.5f, () => sceneController.LoadSceneWithTransition("Start"))));
-
+            popupUIController.OnLoopEnd.AddListener(() => popupUIController.StartCoroutine(CoroutineUtil.WaitFor(4.5f, () => SceneTransitionManager.Instance.LoadSceneWithTransition(nextLevel))));
+            popupUIController.noButton.onClick.AddListener(() => popupUIController.StartCoroutine(CoroutineUtil.WaitFor(4.5f, () => SceneTransitionManager.Instance.LoadSceneWithTransition(SceneName.Lobby))));
         }
     }
 }

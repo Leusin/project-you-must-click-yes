@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -34,14 +34,16 @@ namespace ProjectYouMustClickYes
 
         void Start()
         {
-            LoadDialogues();
+            DialogueEntry dialogueData = DialogueManager.Instance.LoadDialogueEntry();
+            dialogues = dialogueData.dialogueList.Count > 2 ? dialogueData.dialogueList.Skip(2).ToList() : new List<string>();
+            
             string sceneName = SceneManager.GetActiveScene().name;
 
             TMP_Text yesText = yesButton.GetComponentInChildren<TMP_Text>();
             TMP_Text noText = noButton.GetComponentInChildren<TMP_Text>();
 
-            yesText.text = (DialogueManager.Instance.currentLang == Language.KR) ? "예" : "Yes";
-            noText.text = (DialogueManager.Instance.currentLang == Language.KR) ? "아니오" : "No";
+            yesText.text = dialogueData.dialogueList[0];
+            noText.text = dialogueData.dialogueList[1];
 
             yesButton.onClick.AddListener(ChangeText);
 
@@ -61,28 +63,6 @@ namespace ProjectYouMustClickYes
         {
             yesButton.onClick.RemoveListener(ChangeText);
             noButton.onClick.RemoveAllListeners();
-        }
-
-        void LoadDialogues()
-        {
-            TextAsset jsonAsset = Resources.Load<TextAsset>("Data/dialogues_kr");
-            if (jsonAsset != null)
-            {
-                string json = jsonAsset.text;
-                DialogueData data = JsonUtility.FromJson<DialogueData>(json);
-
-                DialogueEntry entry = data.dialogues.Find(d => d.sceneName == SceneManager.GetActiveScene().name);
-
-                if (entry != null)
-                {
-                    dialogues = entry.dialogueList;
-                }
-                else
-                {
-                    //dialogues.Add(SceneManager.GetActiveScene().name);
-                    Debug.LogError("해당 씬에 대한 대화 데이터가 없습니다.");
-                }
-            }
         }
 
         // Yes 버튼을 눌렀을 경우
@@ -124,17 +104,13 @@ namespace ProjectYouMustClickYes
         public void MoveYesButtonAboveNo()
         {
             yesButton.transform.SetAsLastSibling();
-            //noButton.transform.SetAsFirstSibling();
         }
 
         // 아니오 버튼을 위로 바꾸는 함수
         public void MoveNoButtonAboveYes()
         {
-            //yesButton.transform.SetAsFirstSibling();
             noButton.transform.SetAsLastSibling();
-
         }
-
 
         IEnumerator PlayAfterDelay(float delay, string stateName)
         {
