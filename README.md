@@ -9,7 +9,8 @@
 - **장르**: 클릭커 / 인터랙티브 심리 게임
 - **개발 엔진**: Unity
 - **개발 기간**: 2025년 3월 15일 ~ 2025년 6월 26일 (순수 개발 기간: 약 7일)
-- **플레이 링크**: [https://leusin.itch.io/you-must-click-yes](https://leusin.itch.io/you-must-click-yes)
+- **플레이 링크**: [itch.io](https://leusin.itch.io/you-must-click-yes)
+- **프로젝트 노션 링크**: [notion](https://www.notion.so/Project-You-Must-Click-Yes-1b54852dfea28078a322f60465ec49d8)
 
 ## 게임플레이
 
