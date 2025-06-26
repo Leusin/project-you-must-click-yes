@@ -4,7 +4,7 @@
             "sceneName": "Start",
             "dialogueList": ["Yes", "No",
             "You Must Click 'Yes'.",
-            "To start the game, press the '<b>Yes</b>' button."
+            "To start the game, press the '<b>Yes</b>'."
             ]
     },
     {
@@ -46,7 +46,7 @@
       "sceneName": "Level3",
       "dialogueList": ["Yes", "No",
         "Notice: This is the end of the prepared content.",
-        "<b>■ Created by</b>: Juyoung Kim",
+        "<b>■ Created by</b>: 미쳤나방",
         "<b>■ Sound</b>\n<size=90%>– \"Retro Example 2\" by Ketsa (source: Free Music Archive)</size>",
         "<b>■ Images</b>\n<size=90%>– Smiling face icon by Freepik (source: Flaticon)</size>",
         "Thank you for playing."
