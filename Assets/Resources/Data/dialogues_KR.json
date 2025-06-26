@@ -2,14 +2,14 @@
     "dialogues": [
         {
             "sceneName": "Start",
-            "dialogueList": ["예", "아니오",
+            "dialogueList": ["예", "아니오", "다시 보지 않기",
                 "반드시 '예' 버튼을 누르세요.", 
                 "게임을 시작하려면 '<b>예</b>' 버튼을 누르세요."
             ]
         },
         {
             "sceneName": "Level1",
-            "dialogueList": ["예", "아니오",
+            "dialogueList": ["예", "아니오", "다시 보지 않기",
             "환영합니다. 본 시스템은 사용자의 판단을 돕기 위해 설계되었습니다.",
             "화면에 표시되는 지시에 따라 간단한 선택을 진행해 주세요.",
             "시작하시려면 '예' 버튼을 눌러 주십시오.",
@@ -26,7 +26,7 @@
         },
         {
             "sceneName": "Level2",
-            "dialogueList": ["예", "아니오",
+            "dialogueList": ["예", "아니오", "다시 보지 않기",
             "훌륭합니다. 이번에도 잘하실 수 있겠습니까?",
             "선택은 자유입니다. 그러나 올바른 결정을 내려야 합니다.",
             "망설이지 마십시오. 진행하려면 <b>'예'</b>를 선택하십시오.",
@@ -44,7 +44,7 @@
         },
         {
             "sceneName": "Level3",
-            "dialogueList": ["예", "아니오",
+            "dialogueList": ["예", "아니오", "다시 보지 않기",
             "안내: 준비된 내용은 여기까지입니다.",
             "<b>■ 제작</b>: 미쳤나방",
             "<b>■ 사운드</b>\n<size=90%>– \"Retro Example 2\" by Ketsa(Free Music Archive)</size>",
@@ -54,7 +54,7 @@
         },
         {
             "sceneName": "Level4",
-            "dialogueList": ["예", "아니오"
+            "dialogueList": ["예", "아니오", "다시 보지 않기"
             ]
         }
     ]

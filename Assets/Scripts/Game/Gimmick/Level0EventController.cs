@@ -49,8 +49,8 @@ namespace ProjectYouMustClickYes
             
             language.image.sprite = (DialogueManager.Instance.currentLang == Language.KR) ? kr : eng;
 
-            title.text = dialogueData.dialogueList[2];
-            dialogue.text = dialogueData.dialogueList[3];
+            title.text = dialogueData.dialogueList[3];
+            dialogue.text = dialogueData.dialogueList[4];
             yesText.text = dialogueData.dialogueList[0];
             noText.text = dialogueData.dialogueList[1];
         }

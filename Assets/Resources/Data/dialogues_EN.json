@@ -2,14 +2,14 @@
   "dialogues": [
     {
             "sceneName": "Start",
-            "dialogueList": ["Yes", "No",
+            "dialogueList": ["Yes", "No", "don't see it again",
             "You Must Click 'Yes'.",
             "To start the game, press the '<b>Yes</b>'."
             ]
     },
     {
       "sceneName": "Level1",
-      "dialogueList": ["Yes", "No",
+      "dialogueList": ["Yes", "No", "don't see it again",
         "Welcome. This system is designed to help your decision-making.",
         "Follow the instructions on screen to proceed with simple choices.",
         "To begin, please press the 'Yes' button.",
@@ -26,7 +26,7 @@
     },
     {
       "sceneName": "Level2",
-      "dialogueList": ["Yes", "No",
+      "dialogueList": ["Yes", "No", "don't see it again",
         "Excellent. Can you do well again?",
         "The choice is yours. But make the right decision.",
         "Don't hesitate. Select <b>'Yes'</b> to proceed.",
@@ -44,7 +44,7 @@
     },
     {
       "sceneName": "Level3",
-      "dialogueList": ["Yes", "No",
+      "dialogueList": ["Yes", "No", "don't see it again",
         "Notice: This is the end of the prepared content.",
         "<b>■ Created by</b>: 미쳤나방",
         "<b>■ Sound</b>\n<size=90%>– \"Retro Example 2\" by Ketsa (source: Free Music Archive)</size>",
@@ -54,7 +54,7 @@
     },
     {
       "sceneName": "Level4",
-      "dialogueList": ["Yes", "No"
+      "dialogueList": ["Yes", "No",  "don't see it again"
     ]
     }
   ]

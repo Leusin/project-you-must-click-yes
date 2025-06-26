@@ -35,15 +35,17 @@ namespace ProjectYouMustClickYes
         void Start()
         {
             DialogueEntry dialogueData = DialogueManager.Instance.LoadDialogueEntry();
-            dialogues = dialogueData.dialogueList.Count > 2 ? dialogueData.dialogueList.Skip(2).ToList() : new List<string>();
+            dialogues = dialogueData.dialogueList.Count > 2 ? dialogueData.dialogueList.Skip(3).ToList() : new List<string>();
             
             string sceneName = SceneManager.GetActiveScene().name;
 
             TMP_Text yesText = yesButton.GetComponentInChildren<TMP_Text>();
             TMP_Text noText = noButton.GetComponentInChildren<TMP_Text>();
+            TMP_Text checkboxText = checkBox.GetComponentInChildren<TMP_Text>();
 
             yesText.text = dialogueData.dialogueList[0];
             noText.text = dialogueData.dialogueList[1];
+            checkboxText.text = dialogueData.dialogueList[2];
 
             yesButton.onClick.AddListener(ChangeText);
 
